@@ -11,13 +11,17 @@ namespace WiseyAdressbuch
 
         public delegate void OnCellValueChangedDel(object sender, DataGridViewCellEventArgs e);
         public OnCellValueChangedDel OnCellValueChanged;
+                
+        public delegate void OnTabControlClickDel(object sender, EventArgs e);
+        public OnTabControlClickDel OnTabControlClick;
 
 
-        public Window1(OnSaveClickedDel onSaveClickedDel, OnCellValueChangedDel onCellValueChanged)
+        public Window1(OnSaveClickedDel onSaveClickedDel, OnCellValueChangedDel onCellValueChanged, OnTabControlClickDel onTabControlClick)
         {
             InitializeComponent();
             OnSaveClicked += onSaveClickedDel;
             OnCellValueChanged += onCellValueChanged;
+            OnTabControlClick += onTabControlClick;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -26,10 +30,16 @@ namespace WiseyAdressbuch
         }
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-        
-           OnCellValueChanged(sender, e); ;
-             
+        {        
+            OnCellValueChanged(sender, e);              
         }
+
+        private void dataGridView2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            OnCellValueChanged(sender, e);
+        }
+
+       
+
     }
 }

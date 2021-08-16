@@ -12,8 +12,7 @@ namespace WiseyAdressbuch
         private static string connectionString = @"dataSource = C:\Users\Yil\source\repos\WiseyAdressbuch\WiseyAdressbuch\Adressbuch.db";
         private static SQLiteConnection connection;
 
-        private static SQLiteCommand selectFromMitarbeiter;
-        private static SQLiteCommand selectFromOrganisation;
+        private static SQLiteCommand selectCommand;
         private static SQLiteCommand insertIntoMitarbeiter;
         private static SQLiteCommand insertIntoOrganisation;
         private static SQLiteCommand modifyMitarbeiter;
@@ -21,11 +20,9 @@ namespace WiseyAdressbuch
         private static SQLiteCommand deleteMitarbeiter;
         private static SQLiteCommand deleteOrganisation;
 
-        private static SQLiteDataAdapter dataAdapterMitarbeiter;
-        private static SQLiteDataAdapter dataAdapterOrganisation;
+        private static SQLiteDataAdapter dataAdapter;        
 
-        private static DataTable dataTableMitarbeiter;
-        private static DataTable dataTableOrganisation;
+        private static DataTable dataTable;       
 
         private static SQLiteTransaction transaction;
         private static Window1 windowHandle;
@@ -38,89 +35,133 @@ namespace WiseyAdressbuch
 
             Application.Desktop = new MyDesktop();
 
-            Window1 window = new Window1(OnSaveClicked, OnCellValueChanged);
+            Window1 window = new Window1(OnSaveClicked, OnCellValueChanged, OnTabControlClicked);
             windowHandle = window;
             window.Show();
 
+            windowHandle.TabPage1.Text = "Mitarbeiter";
+            windowHandle.TabPage2.Text = "Organisation";
+
             connection = new SQLiteConnection(connectionString);
 
-            //dataAdapter Mitarbeiter 
-            dataAdapterMitarbeiter = new SQLiteDataAdapter(selectFromMitarbeiter);
-            dataAdapterMitarbeiter.AcceptChangesDuringUpdate = true;
-            dataAdapterMitarbeiter.RowUpdated += DataAdapter_RowUpdated;
+            BuildSelectCommand();
+
+            //dataAdapter
+            dataAdapter = new SQLiteDataAdapter(selectCommand);
+            dataAdapter.AcceptChangesDuringUpdate = true;
+            dataAdapter.RowUpdated += DataAdapter_RowUpdated;
             //--
 
-            //dataAdapter Organisation
-            dataAdapterOrganisation = new SQLiteDataAdapter();
-            //--
-
-            //selectMitarbeiter command
-            selectFromMitarbeiter = new SQLiteCommand();
-            selectFromMitarbeiter.Connection = connection;
-            selectFromMitarbeiter.CommandText = "SELECT * FROM Mitarbeiter";
-            //--
-
-            //selectOrganisation command
-            selectFromOrganisation = new SQLiteCommand();
-            selectFromOrganisation.Connection = connection;
-            selectFromOrganisation.CommandText = "SELECT * FROM Organisation";
-            //--
-
-            dataTableMitarbeiter = new DataTable();
+            windowHandle.TabControl1.Selected += TabControl1_Selected;                       
             
-            comBuilder = new SQLiteCommandBuilder(dataAdapterMitarbeiter);
             connection.Open();
             transaction = connection.BeginTransaction();
-            dataAdapterMitarbeiter.Fill(dataTableMitarbeiter);
-            window.dataGridView.Fill(dataTableMitarbeiter.DefaultView);
+            FillCurrentDataGrid();
             
 
         }
+
+
+        private static void BuildSelectCommand()
+        {
+            //select command
+            selectCommand = new SQLiteCommand();
+            selectCommand.Connection = connection;
+            selectCommand.CommandText = "SELECT * FROM " + windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;
+            //--
+        }
+
+
+        private static void BuildInsertCommand()
+        {
+
+        }
+
+
+        private static void BuildDeleteCommand()
+        {
+
+        }
+
+
+        private static void BuildUpdateCommand()
+        {
+
+        }
+
+
+        private static void TabControl1_Selected(object sender, TabControlEventArgs e)
+        {
+            FillCurrentDataGrid();
+        }
+
+        private static void FillCurrentDataGrid()
+        {
+            BuildSelectCommand();
+            dataTable = new DataTable();
+            dataAdapter.SelectCommand = selectCommand;
+            dataAdapter.Fill(dataTable);
+            Control.ControlCollection controls = windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Controls;
+
+            foreach (Control item in controls)
+            {
+                if (item.GetType() == typeof(DataGridView))
+                {
+                    ((DataGridView)item).Fill(dataTable.DefaultView);
+                }
+            }
+        }
+
 
         private static void DataAdapter_RowUpdated(object sender, System.Data.Common.RowUpdatedEventArgs e)
         {
-            dataAdapterMitarbeiter.Fill(dataTableMitarbeiter);
+            dataAdapter.Fill(dataTable);
             //windowHandle.dataGridView.Fill(dataTable.DefaultView);
         }
-
         
+
 
         public static void OnSaveClicked(object sender, EventArgs e)
         {
-            dataAdapterMitarbeiter.Update(dataTableMitarbeiter);
+            dataAdapter.Update(dataTable);
             transaction.Commit();
 
         }
-
-
        
 
         public static void OnCellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex == windowHandle.dataGridView.RowCount-1)
+            DataGridView currentDataGridView = ((DataGridView)sender);
+            if (e.RowIndex == currentDataGridView.RowCount-1)
             {
                 MessageBox.Show("Ignore");
             }
             else
             {
-                object cellValue = ((DataGridView)sender).CurrentCell.Value;
-                dataTableMitarbeiter.Rows[e.RowIndex][e.ColumnIndex] = cellValue;
+                object cellValue = currentDataGridView.CurrentCell.Value;
+                dataTable.Rows[e.RowIndex][e.ColumnIndex] = cellValue;
 
-                dataAdapterMitarbeiter.UpdateCommand = CreateInsertCommand("Mitarbeiter", e.ColumnIndex, cellValue);
-
+                dataAdapter.UpdateCommand = CreateInsertCommand(windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text, e.ColumnIndex, cellValue);
 
             }
 
-
-
         }
+
+
+
+        public static void OnTabControlClicked(object sender , EventArgs e)
+        {
+            FillCurrentDataGrid();
+        }
+
+
 
 
         private static SQLiteCommand CreateInsertCommand(string tableName, int columnIndex, object value )
         {
             SQLiteCommand insertCommand = new SQLiteCommand();
             insertCommand.Connection = connection;
-            insertCommand.CommandText = "Insert Into " + tableName + " ('"+dataTableMitarbeiter.Columns[columnIndex]+ "') VALUES ('" + value + "')";
+            insertCommand.CommandText = "Insert Into " + tableName + " ('"+dataTable.Columns[columnIndex]+ "') VALUES ('" + value + "')";
             return insertCommand;
         }
 

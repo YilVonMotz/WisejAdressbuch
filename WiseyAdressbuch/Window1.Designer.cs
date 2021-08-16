@@ -110,6 +110,7 @@ namespace WiseyAdressbuch
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.Size = new System.Drawing.Size(997, 370);
             this.dataGridView2.TabIndex = 1;
+            this.dataGridView2.CellValueChanged += new Wisej.Web.DataGridViewCellEventHandler(this.dataGridView2_CellValueChanged);
             // 
             // Window1
             // 
@@ -142,7 +143,14 @@ namespace WiseyAdressbuch
         private TabPage tabPage2;
         private DataGridView dataGridView2;
 
-        public DataGridView dataGridView { get { return dataGridView1; } set { dataGridView1 = value; } }
+        public DataGridView DataGridView1 { get { return dataGridView1; } set { dataGridView1 = value; } }
+        public DataGridView DataGridView2 { get { return dataGridView2; } set { dataGridView2 = value; } }
+        public Button Button1 { get { return button1; } set{ button1 = value; } }
+        public TabControl TabControl1 { get { return tabControl1; } set { tabControl1 = value; } }
+        public TabPage TabPage1 { get { return tabPage1; } set { tabPage1 = value; } }
+        public TabPage TabPage2 { get { return tabPage2; } set { tabPage2 = value; } }
+        
+        
 
     }
 }
