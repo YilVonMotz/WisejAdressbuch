@@ -3,6 +3,7 @@ using Wisej.Web;
 using System.Data.SQLite;
 using System.Data;
 using System.Collections.Generic;
+using System.Text;
 
 namespace WiseyAdressbuch
 {
@@ -62,13 +63,88 @@ namespace WiseyAdressbuch
         }
 
 
+        private static int GetDBEntriesCount(string tableName, string columnName, string searchPhrase)
+        {
+            SQLiteDataReader reader;
+            SQLiteCommand com = null;
+            try
+            {
+                com = connection.CreateCommand();
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+            com.CommandText = "select * from " + tableName + " where " + columnName + " like '" + searchPhrase + "'";
+
+
+            int stepCount = 0;
+
+            try
+            {
+                reader = com.ExecuteReader();
+                while (reader.Read()) ;
+                stepCount = reader.StepCount;
+                reader.Close();
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return stepCount;
+        }
+
+
+
         private static void BuildSelectCommand()
         {
-            //select command
             selectCommand = new SQLiteCommand();
             selectCommand.Connection = connection;
-            selectCommand.CommandText = "SELECT * FROM " + windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;
-            //--
+            selectCommand.CommandText = "SELECT * FROM " + windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;           
+        }
+
+
+
+        private static void BuildSelectCommand(params KeyValuePair<string,string>[] keyValuePair)
+        {            
+            selectCommand = new SQLiteCommand();
+            selectCommand.Connection = connection;
+            string selectedTable = windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;
+
+            StringBuilder sb = new StringBuilder("select * from " + selectedTable);  
+
+            for (int i = 0; i < keyValuePair.Length; i++)
+            {
+                string key = keyValuePair[i].Key;
+                string value = keyValuePair[i].Value;
+
+                if (i == 0)
+                {
+                    sb.Append(" where ");
+                }
+
+                if (i > 0)
+                {
+                    sb.Append(" AND ");
+                }
+
+
+                if (GetDBEntriesCount(selectedTable, key, value) == 0)
+                {
+                    sb.Append(key + " like '" + value + "%' ");
+
+                }
+                else
+                {
+                    sb.Append(key + " like '" + value + "' ");
+
+                }
+
+
+            }
+
+            selectCommand.CommandText = sb.ToString();
         }
 
 
@@ -163,6 +239,25 @@ namespace WiseyAdressbuch
             insertCommand.Connection = connection;
             insertCommand.CommandText = "Insert Into " + tableName + " ('"+dataTable.Columns[columnIndex]+ "') VALUES ('" + value + "')";
             return insertCommand;
+        }
+
+        private static Dictionary<Label, TextBox> searchUIDict = new Dictionary<Label, TextBox>();
+        private static void InitializeSearchUI()
+        {
+            searchUIDict.Add(windowHandle.label1, windowHandle.textBox1);
+            searchUIDict.Add(windowHandle.label2, windowHandle.textBox2);
+            searchUIDict.Add(windowHandle.label3, windowHandle.textBox3);
+            searchUIDict.Add(windowHandle.label4, windowHandle.textBox4);
+            searchUIDict.Add(windowHandle.label5, windowHandle.textBox5);
+            searchUIDict.Add(windowHandle.label6, windowHandle.textBox6);
+            searchUIDict.Add(windowHandle.label7, windowHandle.textBox7);
+            searchUIDict.Add(windowHandle.label8, windowHandle.textBox8);
+            searchUIDict.Add(windowHandle.label9, windowHandle.textBox9);
+            searchUIDict.Add(windowHandle.label10, windowHandle.textBox10);
+            searchUIDict.Add(windowHandle.label11, windowHandle.textBox11);
+
+            
+            
         }
 
         //
