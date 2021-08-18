@@ -21,6 +21,7 @@ namespace WiseyAdressbuch
         private static SQLiteCommand deleteMitarbeiter;
         private static SQLiteCommand deleteOrganisation;
 
+
         private static SQLiteDataAdapter dataAdapter;        
 
         private static DataTable dataTable;       
@@ -28,17 +29,29 @@ namespace WiseyAdressbuch
         private static SQLiteTransaction transaction;
         private static Window1 windowHandle;
 
+        private static string[] mitarbeiterColumnNames = new string[8];
+        private static string[] organisationColumnNames = new string[4];
+
+        
+
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         static void Main()
-        {
-
+        {            
             Application.Desktop = new MyDesktop();
 
-            Window1 window = new Window1(OnSaveClicked, OnCellValueChanged, OnTabControlClicked);
+            Window1 window = new Window1
+                (
+                OnSaveClicked
+                , OnCellValueChanged
+                , OnTabControlClicked
+                , OnSearchButtonClick
+                );
+
             windowHandle = window;
-            window.Show();
+            window.Show();            
 
             windowHandle.TabPage1.Text = "Mitarbeiter";
             windowHandle.TabPage2.Text = "Organisation";
@@ -57,7 +70,9 @@ namespace WiseyAdressbuch
             
             connection.Open();
             transaction = connection.BeginTransaction();
-            FillCurrentDataGrid();
+            FillCurrentDataGrid(BuildSelectCommand());
+            InitializeSearchUI();
+            
             
 
         }
@@ -97,54 +112,57 @@ namespace WiseyAdressbuch
 
 
 
-        private static void BuildSelectCommand()
+        private static SQLiteCommand BuildSelectCommand()
         {
             selectCommand = new SQLiteCommand();
             selectCommand.Connection = connection;
-            selectCommand.CommandText = "SELECT * FROM " + windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;           
+            selectCommand.CommandText = "SELECT * FROM " + windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;
+            return selectCommand;
         }
 
 
 
-        private static void BuildSelectCommand(params KeyValuePair<string,string>[] keyValuePair)
+        private static SQLiteCommand BuildSelectCommand(string[] columns, object[] values)
         {            
             selectCommand = new SQLiteCommand();
             selectCommand.Connection = connection;
-            string selectedTable = windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;
+            string selectedTable = windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;            
 
             StringBuilder sb = new StringBuilder("select * from " + selectedTable);  
 
-            for (int i = 0; i < keyValuePair.Length; i++)
-            {
-                string key = keyValuePair[i].Key;
-                string value = keyValuePair[i].Value;
+            for (int i = 0; i < columns.Length; i++)
+            {                
 
                 if (i == 0)
                 {
                     sb.Append(" where ");
                 }
 
-                if (i > 0)
+                if((string)values[i] != string.Empty)
                 {
-                    sb.Append(" AND ");
-                }
+                    if (i > 1)
+                    {
+                        sb.Append(" AND ");
+                    }
 
 
-                if (GetDBEntriesCount(selectedTable, key, value) == 0)
-                {
-                    sb.Append(key + " like '" + value + "%' ");
+                    if (GetDBEntriesCount(selectedTable,columns[i] ,(string)values[i]) == 0)
+                    {
+                        sb.Append(columns[i] + " like '" + values[i] + "%' ");
 
-                }
-                else
-                {
-                    sb.Append(key + " like '" + value + "' ");
+                    }
+                    else
+                    {
+                        sb.Append(columns[i] + " like '" + values[i] + "' ");
 
-                }
+                    }
+                }              
 
 
             }
 
             selectCommand.CommandText = sb.ToString();
+            return selectCommand;
         }
 
 
@@ -168,14 +186,14 @@ namespace WiseyAdressbuch
 
         private static void TabControl1_Selected(object sender, TabControlEventArgs e)
         {
-            FillCurrentDataGrid();
+            FillCurrentDataGrid(BuildSelectCommand());
         }
 
-        private static void FillCurrentDataGrid()
+        private static void FillCurrentDataGrid(SQLiteCommand _selectCommand)
         {
             BuildSelectCommand();
             dataTable = new DataTable();
-            dataAdapter.SelectCommand = selectCommand;
+            dataAdapter.SelectCommand = _selectCommand;
             dataAdapter.Fill(dataTable);
             Control.ControlCollection controls = windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Controls;
 
@@ -227,9 +245,17 @@ namespace WiseyAdressbuch
 
         public static void OnTabControlClicked(object sender , EventArgs e)
         {
-            FillCurrentDataGrid();
+            FillCurrentDataGrid(BuildSelectCommand());
         }
 
+
+        public static void OnSearchButtonClick(object sender, EventArgs e)
+        {
+            string tableName = windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;
+            FillCurrentDataGrid(BuildSelectCommand());
+        }
+
+      
 
 
 
@@ -241,23 +267,40 @@ namespace WiseyAdressbuch
             return insertCommand;
         }
 
-        private static Dictionary<Label, TextBox> searchUIDict = new Dictionary<Label, TextBox>();
+       
         private static void InitializeSearchUI()
         {
-            searchUIDict.Add(windowHandle.label1, windowHandle.textBox1);
-            searchUIDict.Add(windowHandle.label2, windowHandle.textBox2);
-            searchUIDict.Add(windowHandle.label3, windowHandle.textBox3);
-            searchUIDict.Add(windowHandle.label4, windowHandle.textBox4);
-            searchUIDict.Add(windowHandle.label5, windowHandle.textBox5);
-            searchUIDict.Add(windowHandle.label6, windowHandle.textBox6);
-            searchUIDict.Add(windowHandle.label7, windowHandle.textBox7);
-            searchUIDict.Add(windowHandle.label8, windowHandle.textBox8);
-            searchUIDict.Add(windowHandle.label9, windowHandle.textBox9);
-            searchUIDict.Add(windowHandle.label10, windowHandle.textBox10);
-            searchUIDict.Add(windowHandle.label11, windowHandle.textBox11);
+            DataTable mitarbeiterTable = new DataTable();
+            DataTable organisationTable = new DataTable();
+            SQLiteDataAdapter dataAdapter = new SQLiteDataAdapter();
+
+            windowHandle.InitSearchControls();
+
+            //tab1 Mitarbeiter
+            dataAdapter.SelectCommand = new SQLiteCommand("SELECT * FROM Mitarbeiter LIMIT 1",connection);
+            dataAdapter.Fill(mitarbeiterTable);
+
+            for(int i = 0; i < Program.mitarbeiterColumnNames.Length; i++)
+            {
+                mitarbeiterColumnNames[i] = mitarbeiterTable.Columns[i].ColumnName;
+            }
+
 
             
-            
+
+
+            //tab2 Organisation
+            dataAdapter.SelectCommand = new SQLiteCommand("SELECT * FROM Organisation LIMIT 1", connection);
+            dataAdapter.Fill(organisationTable);
+
+            for(int i = 0; i < Program.organisationColumnNames.Length; i++)
+            {
+                organisationColumnNames[i] = organisationTable.Columns[i].ColumnName;
+            }
+
+
+           
+
         }
 
         //

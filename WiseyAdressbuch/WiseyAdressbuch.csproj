@@ -67,6 +67,12 @@
     <Compile Include="MyDesktop.Designer.cs">
       <DependentUpon>MyDesktop.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchField.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SearchField.Designer.cs">
+      <DependentUpon>SearchField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Window1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -93,6 +99,9 @@
     <Reference Include="Wisej.Framework" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="SearchField.resx">
+      <DependentUpon>SearchField.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Window1.resx">
       <DependentUpon>Window1.cs</DependentUpon>
     </EmbeddedResource>

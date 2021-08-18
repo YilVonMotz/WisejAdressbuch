@@ -37,36 +37,38 @@ namespace WiseyAdressbuch
             this.button1 = new Wisej.Web.Button();
             this.tabControl1 = new Wisej.Web.TabControl();
             this.tabPage1 = new Wisej.Web.TabPage();
+            this.button3 = new Wisej.Web.Button();
             this.tableLayoutPanel1 = new Wisej.Web.TableLayoutPanel();
-            this.textBox7 = new Wisej.Web.TextBox();
-            this.textBox6 = new Wisej.Web.TextBox();
-            this.textBox5 = new Wisej.Web.TextBox();
-            this.textBox4 = new Wisej.Web.TextBox();
-            this.textBox3 = new Wisej.Web.TextBox();
-            this.textBox2 = new Wisej.Web.TextBox();
-            this.textBox1 = new Wisej.Web.TextBox();
-            this.label7 = new Wisej.Web.Label();
-            this.label6 = new Wisej.Web.Label();
-            this.label5 = new Wisej.Web.Label();
-            this.label4 = new Wisej.Web.Label();
-            this.label3 = new Wisej.Web.Label();
-            this.label2 = new Wisej.Web.Label();
-            this.label1 = new Wisej.Web.Label();
+            this.textBoxEMail = new Wisej.Web.TextBox();
+            this.textBoxOrganisation = new Wisej.Web.TextBox();
+            this.textBoxTelefonnummer = new Wisej.Web.TextBox();
+            this.textBoxNachname = new Wisej.Web.TextBox();
+            this.textBoxVorname = new Wisej.Web.TextBox();
+            this.textBoxTitel = new Wisej.Web.TextBox();
+            this.textBoxAnrede = new Wisej.Web.TextBox();
+            this.textBoxID = new Wisej.Web.TextBox();
+            this.EMail = new Wisej.Web.Label();
+            this.Organisation = new Wisej.Web.Label();
+            this.Telefonnummer = new Wisej.Web.Label();
+            this.Nachname = new Wisej.Web.Label();
+            this.Vorname = new Wisej.Web.Label();
+            this.Titel = new Wisej.Web.Label();
+            this.Anrede = new Wisej.Web.Label();
+            this.ID = new Wisej.Web.Label();
             this.tabPage2 = new Wisej.Web.TabPage();
+            this.button2 = new Wisej.Web.Button();
             this.tableLayoutPanel2 = new Wisej.Web.TableLayoutPanel();
-            this.textBox11 = new Wisej.Web.TextBox();
-            this.textBox10 = new Wisej.Web.TextBox();
-            this.textBox9 = new Wisej.Web.TextBox();
-            this.textBox8 = new Wisej.Web.TextBox();
-            this.label8 = new Wisej.Web.Label();
-            this.label9 = new Wisej.Web.Label();
-            this.label10 = new Wisej.Web.Label();
-            this.label11 = new Wisej.Web.Label();
+            this.textBoxWebseite = new Wisej.Web.TextBox();
+            this.textBoxTelefon = new Wisej.Web.TextBox();
+            this.textBoxAdresse = new Wisej.Web.TextBox();
+            this.textBoxFirmenname = new Wisej.Web.TextBox();
+            this.Webseite = new Wisej.Web.Label();
+            this.Telefon = new Wisej.Web.Label();
+            this.Adresse = new Wisej.Web.Label();
+            this.Firmenname = new Wisej.Web.Label();
             this.dataGridView2 = new Wisej.Web.DataGridView();
             this.window1BindingSource = new Wisej.Web.BindingSource(this.components);
             this.window1BindingSource1 = new Wisej.Web.BindingSource(this.components);
-            this.button2 = new Wisej.Web.Button();
-            this.button3 = new Wisej.Web.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -122,160 +124,191 @@ namespace WiseyAdressbuch
             this.tabPage1.Size = new System.Drawing.Size(1030, 414);
             this.tabPage1.Text = "tabPage1";
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(946, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(68, 60);
+            this.button3.TabIndex = 4;
+            this.button3.Text = "Suchen";
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.Anchor = ((Wisej.Web.AnchorStyles)(((Wisej.Web.AnchorStyles.Top | Wisej.Web.AnchorStyles.Left) 
             | Wisej.Web.AnchorStyles.Right)));
             this.tableLayoutPanel1.AutoSizeMode = Wisej.Web.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutPanel1.ColumnCount = 7;
+            this.tableLayoutPanel1.ColumnCount = 8;
             this.tableLayoutPanel1.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Percent, 50F));
             this.tableLayoutPanel1.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Absolute, 112F));
             this.tableLayoutPanel1.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Absolute, 112F));
             this.tableLayoutPanel1.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Absolute, 112F));
             this.tableLayoutPanel1.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Absolute, 115F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Absolute, 326F));
-            this.tableLayoutPanel1.Controls.Add(this.textBox7, 6, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox6, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox5, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox4, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox3, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox2, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.textBox1, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 6, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label6, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label5, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label4, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Absolute, 226F));
+            this.tableLayoutPanel1.Controls.Add(this.textBoxEMail, 7, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxOrganisation, 6, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxTelefonnummer, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxNachname, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxVorname, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxTitel, 2, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxAnrede, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.textBoxID, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.EMail, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.Organisation, 6, 0);
+            this.tableLayoutPanel1.Controls.Add(this.Telefonnummer, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.Nachname, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.Vorname, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.Titel, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.Anrede, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.ID, 0, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(17, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new Wisej.Web.RowStyle(Wisej.Web.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new Wisej.Web.RowStyle(Wisej.Web.SizeType.Absolute, 29F));
             this.tableLayoutPanel1.RowStyles.Add(new Wisej.Web.RowStyle(Wisej.Web.SizeType.Absolute, 27F));
+            this.tableLayoutPanel1.RowStyles.Add(new Wisej.Web.RowStyle(Wisej.Web.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(925, 63);
             this.tableLayoutPanel1.TabIndex = 1;
             this.tableLayoutPanel1.TabStop = true;
             // 
-            // textBox7
+            // textBoxEMail
             // 
-            this.textBox7.Location = new System.Drawing.Point(602, 39);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(100, 21);
-            this.textBox7.TabIndex = 13;
+            this.textBoxEMail.Location = new System.Drawing.Point(702, 37);
+            this.textBoxEMail.Name = "textBoxEMail";
+            this.textBoxEMail.Size = new System.Drawing.Size(100, 22);
+            this.textBoxEMail.TabIndex = 15;
+            this.textBoxEMail.TextChanged += new System.EventHandler(this.textBoxEMail_TextChanged);
             // 
-            // textBox6
+            // textBoxOrganisation
             // 
-            this.textBox6.Location = new System.Drawing.Point(487, 39);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 21);
-            this.textBox6.TabIndex = 12;
+            this.textBoxOrganisation.Location = new System.Drawing.Point(582, 37);
+            this.textBoxOrganisation.Name = "textBoxOrganisation";
+            this.textBoxOrganisation.Size = new System.Drawing.Size(100, 22);
+            this.textBoxOrganisation.TabIndex = 14;
+            this.textBoxOrganisation.TextChanged += new System.EventHandler(this.textBoxOrganisation_TextChanged);
             // 
-            // textBox5
+            // textBoxTelefonnummer
             // 
-            this.textBox5.Location = new System.Drawing.Point(375, 39);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 21);
-            this.textBox5.TabIndex = 11;
+            this.textBoxTelefonnummer.Location = new System.Drawing.Point(467, 37);
+            this.textBoxTelefonnummer.Name = "textBoxTelefonnummer";
+            this.textBoxTelefonnummer.Size = new System.Drawing.Size(100, 22);
+            this.textBoxTelefonnummer.TabIndex = 13;
+            this.textBoxTelefonnummer.TextChanged += new System.EventHandler(this.textBoxTelefonnummer_TextChanged);
             // 
-            // textBox4
+            // textBoxNachname
             // 
-            this.textBox4.Location = new System.Drawing.Point(263, 39);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 21);
-            this.textBox4.TabIndex = 10;
+            this.textBoxNachname.Location = new System.Drawing.Point(355, 37);
+            this.textBoxNachname.Name = "textBoxNachname";
+            this.textBoxNachname.Size = new System.Drawing.Size(100, 22);
+            this.textBoxNachname.TabIndex = 12;
+            this.textBoxNachname.TextChanged += new System.EventHandler(this.textBoxNachname_TextChanged);
             // 
-            // textBox3
+            // textBoxVorname
             // 
-            this.textBox3.Location = new System.Drawing.Point(151, 39);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(100, 21);
-            this.textBox3.TabIndex = 9;
+            this.textBoxVorname.Location = new System.Drawing.Point(243, 37);
+            this.textBoxVorname.Name = "textBoxVorname";
+            this.textBoxVorname.Size = new System.Drawing.Size(100, 22);
+            this.textBoxVorname.TabIndex = 11;
+            this.textBoxVorname.TextChanged += new System.EventHandler(this.textBoxVorname_TextChanged);
             // 
-            // textBox2
+            // textBoxTitel
             // 
-            this.textBox2.Location = new System.Drawing.Point(77, 39);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(68, 21);
-            this.textBox2.TabIndex = 8;
+            this.textBoxTitel.Location = new System.Drawing.Point(131, 37);
+            this.textBoxTitel.Name = "textBoxTitel";
+            this.textBoxTitel.Size = new System.Drawing.Size(100, 22);
+            this.textBoxTitel.TabIndex = 10;
+            this.textBoxTitel.TextChanged += new System.EventHandler(this.textBoxTitel_TextChanged);
             // 
-            // textBox1
+            // textBoxAnrede
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 39);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(68, 21);
-            this.textBox1.TabIndex = 7;
+            this.textBoxAnrede.Location = new System.Drawing.Point(67, 37);
+            this.textBoxAnrede.Name = "textBoxAnrede";
+            this.textBoxAnrede.Size = new System.Drawing.Size(58, 22);
+            this.textBoxAnrede.TabIndex = 9;
+            this.textBoxAnrede.TextChanged += new System.EventHandler(this.textBoxAnrede_TextChanged);
             // 
-            // label7
+            // textBoxID
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(602, 3);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(39, 15);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "label7";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.textBoxID.Location = new System.Drawing.Point(3, 37);
+            this.textBoxID.Name = "textBoxID";
+            this.textBoxID.Size = new System.Drawing.Size(58, 22);
+            this.textBoxID.TabIndex = 8;
+            this.textBoxID.TextChanged += new System.EventHandler(this.textBoxID_TextChanged);
             // 
-            // label6
+            // EMail
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(487, 3);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(39, 15);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "label6";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.EMail.AutoSize = true;
+            this.EMail.Location = new System.Drawing.Point(702, 3);
+            this.EMail.Name = "EMail";
+            this.EMail.Size = new System.Drawing.Size(37, 15);
+            this.EMail.TabIndex = 7;
+            this.EMail.Text = "EMail";
             // 
-            // label5
+            // Organisation
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(375, 3);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(39, 15);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "label5";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Organisation.AutoSize = true;
+            this.Organisation.Location = new System.Drawing.Point(582, 3);
+            this.Organisation.Name = "Organisation";
+            this.Organisation.Size = new System.Drawing.Size(78, 15);
+            this.Organisation.TabIndex = 6;
+            this.Organisation.Text = "Organisation";
             // 
-            // label4
+            // Telefonnummer
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(263, 3);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(39, 15);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "label4";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Telefonnummer.AutoSize = true;
+            this.Telefonnummer.Location = new System.Drawing.Point(467, 3);
+            this.Telefonnummer.Name = "Telefonnummer";
+            this.Telefonnummer.Size = new System.Drawing.Size(96, 15);
+            this.Telefonnummer.TabIndex = 5;
+            this.Telefonnummer.Text = "Telefonnummer";
             // 
-            // label3
+            // Nachname
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(151, 3);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "label3";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Nachname.AutoSize = true;
+            this.Nachname.Location = new System.Drawing.Point(355, 3);
+            this.Nachname.Name = "Nachname";
+            this.Nachname.Size = new System.Drawing.Size(67, 15);
+            this.Nachname.TabIndex = 4;
+            this.Nachname.Text = "Nachname";
             // 
-            // label2
+            // Vorname
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(77, 3);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Vorname.AutoSize = true;
+            this.Vorname.Location = new System.Drawing.Point(243, 3);
+            this.Vorname.Name = "Vorname";
+            this.Vorname.Size = new System.Drawing.Size(57, 15);
+            this.Vorname.TabIndex = 3;
+            this.Vorname.Text = "Vorname";
             // 
-            // label1
+            // Titel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(3, 3);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Titel.AutoSize = true;
+            this.Titel.Location = new System.Drawing.Point(131, 3);
+            this.Titel.Name = "Titel";
+            this.Titel.Size = new System.Drawing.Size(29, 15);
+            this.Titel.TabIndex = 2;
+            this.Titel.Text = "Titel";
+            // 
+            // Anrede
+            // 
+            this.Anrede.AutoSize = true;
+            this.Anrede.Location = new System.Drawing.Point(67, 3);
+            this.Anrede.Name = "Anrede";
+            this.Anrede.Size = new System.Drawing.Size(46, 15);
+            this.Anrede.TabIndex = 1;
+            this.Anrede.Text = "Anrede";
+            // 
+            // ID
+            // 
+            this.ID.AutoSize = true;
+            this.ID.Location = new System.Drawing.Point(3, 3);
+            this.ID.Name = "ID";
+            this.ID.Size = new System.Drawing.Size(17, 15);
+            this.ID.TabIndex = 0;
+            this.ID.Text = "ID";
             // 
             // tabPage2
             // 
@@ -287,6 +320,15 @@ namespace WiseyAdressbuch
             this.tabPage2.Size = new System.Drawing.Size(1030, 414);
             this.tabPage2.Text = "tabPage2";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(946, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(68, 60);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Suchen";
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.Anchor = ((Wisej.Web.AnchorStyles)(((Wisej.Web.AnchorStyles.Top | Wisej.Web.AnchorStyles.Left) 
@@ -297,14 +339,14 @@ namespace WiseyAdressbuch
             this.tableLayoutPanel2.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Percent, 52.73F));
             this.tableLayoutPanel2.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Absolute, 131F));
             this.tableLayoutPanel2.ColumnStyles.Add(new Wisej.Web.ColumnStyle(Wisej.Web.SizeType.Absolute, 590F));
-            this.tableLayoutPanel2.Controls.Add(this.textBox11, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.textBox10, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.textBox9, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.textBox8, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label8, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label9, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label10, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label11, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxWebseite, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxTelefon, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxAdresse, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.textBoxFirmenname, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.Webseite, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.Telefon, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.Adresse, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.Firmenname, 0, 0);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(17, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
@@ -314,73 +356,73 @@ namespace WiseyAdressbuch
             this.tableLayoutPanel2.TabIndex = 2;
             this.tableLayoutPanel2.TabStop = true;
             // 
-            // textBox11
+            // textBoxWebseite
             // 
-            this.textBox11.Location = new System.Drawing.Point(3, 35);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(89, 22);
-            this.textBox11.TabIndex = 11;
+            this.textBoxWebseite.Location = new System.Drawing.Point(335, 35);
+            this.textBoxWebseite.Name = "textBoxWebseite";
+            this.textBoxWebseite.Size = new System.Drawing.Size(100, 22);
+            this.textBoxWebseite.TabIndex = 7;
+            this.textBoxWebseite.TextChanged += new System.EventHandler(this.textBoxWebseite_TextChanged);
             // 
-            // textBox10
+            // textBoxTelefon
             // 
-            this.textBox10.Location = new System.Drawing.Point(98, 35);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 22);
-            this.textBox10.TabIndex = 10;
+            this.textBoxTelefon.Location = new System.Drawing.Point(204, 35);
+            this.textBoxTelefon.Name = "textBoxTelefon";
+            this.textBoxTelefon.Size = new System.Drawing.Size(100, 22);
+            this.textBoxTelefon.TabIndex = 6;
+            this.textBoxTelefon.TextChanged += new System.EventHandler(this.textBoxTelefon_TextChanged);
             // 
-            // textBox9
+            // textBoxAdresse
             // 
-            this.textBox9.Location = new System.Drawing.Point(204, 35);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 22);
-            this.textBox9.TabIndex = 9;
+            this.textBoxAdresse.Location = new System.Drawing.Point(98, 35);
+            this.textBoxAdresse.Name = "textBoxAdresse";
+            this.textBoxAdresse.Size = new System.Drawing.Size(100, 22);
+            this.textBoxAdresse.TabIndex = 5;
+            this.textBoxAdresse.TextChanged += new System.EventHandler(this.textBoxAdresse_TextChanged);
             // 
-            // textBox8
+            // textBoxFirmenname
             // 
-            this.textBox8.Location = new System.Drawing.Point(335, 35);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 22);
-            this.textBox8.TabIndex = 8;
+            this.textBoxFirmenname.Location = new System.Drawing.Point(3, 35);
+            this.textBoxFirmenname.Name = "textBoxFirmenname";
+            this.textBoxFirmenname.Size = new System.Drawing.Size(89, 22);
+            this.textBoxFirmenname.TabIndex = 4;
+            this.textBoxFirmenname.TextChanged += new System.EventHandler(this.textBoxFirmenname_TextChanged);
             // 
-            // label8
+            // Webseite
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 3);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(39, 15);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "label8";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Webseite.AutoSize = true;
+            this.Webseite.Location = new System.Drawing.Point(335, 3);
+            this.Webseite.Name = "Webseite";
+            this.Webseite.Size = new System.Drawing.Size(59, 15);
+            this.Webseite.TabIndex = 3;
+            this.Webseite.Text = "Webseite";
             // 
-            // label9
+            // Telefon
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(98, 3);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(39, 15);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "label9";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Telefon.AutoSize = true;
+            this.Telefon.Location = new System.Drawing.Point(204, 3);
+            this.Telefon.Name = "Telefon";
+            this.Telefon.Size = new System.Drawing.Size(48, 15);
+            this.Telefon.TabIndex = 2;
+            this.Telefon.Text = "Telefon";
             // 
-            // label10
+            // Adresse
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(204, 3);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(46, 15);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "label10";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Adresse.AutoSize = true;
+            this.Adresse.Location = new System.Drawing.Point(98, 3);
+            this.Adresse.Name = "Adresse";
+            this.Adresse.Size = new System.Drawing.Size(52, 15);
+            this.Adresse.TabIndex = 1;
+            this.Adresse.Text = "Adresse";
             // 
-            // label11
+            // Firmenname
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(335, 3);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(46, 15);
-            this.label11.TabIndex = 4;
-            this.label11.Text = "label11";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Firmenname.AutoSize = true;
+            this.Firmenname.Location = new System.Drawing.Point(3, 3);
+            this.Firmenname.Name = "Firmenname";
+            this.Firmenname.Size = new System.Drawing.Size(39, 15);
+            this.Firmenname.TabIndex = 0;
+            this.Firmenname.Text = "Name";
             // 
             // dataGridView2
             // 
@@ -401,22 +443,6 @@ namespace WiseyAdressbuch
             // window1BindingSource1
             // 
             this.window1BindingSource1.DataSource = typeof(WiseyAdressbuch.Window1);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(946, 3);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(68, 60);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Suchen";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(946, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(68, 60);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Suchen";
             // 
             // Window1
             // 
@@ -454,30 +480,22 @@ namespace WiseyAdressbuch
         private DataGridView dataGridView2;
         private TableLayoutPanel tableLayoutPanel1;
         private TableLayoutPanel tableLayoutPanel2;
-        public Label label7;
-        public Label label6;
-        public Label label5;
-        public Label label4;
-        public Label label3;
-        public Label label2;
-        public Label label1;
-        public Label label8;
-        public Label label9;
-        public Label label10;
-        public Label label11;
-        public TextBox textBox7;
-        public TextBox textBox6;
-        public TextBox textBox5;
-        public TextBox textBox4;
-        public TextBox textBox3;
-        public TextBox textBox2;
-        public TextBox textBox1;
-        public TextBox textBox11;
-        public TextBox textBox10;
-        public TextBox textBox9;
-        public TextBox textBox8;
+
         private Button button3;
         private Button button2;
+
+        private Label Titel;
+        private Label Anrede;
+        private Label ID;
+        private Label Nachname;
+        private Label Vorname;
+        private Label Telefonnummer;
+        private Label Organisation;
+        private Label EMail;
+        private Label Adresse;
+        private Label Firmenname;
+        private Label Webseite;
+        private Label Telefon;
 
         public DataGridView DataGridView1 { get { return dataGridView1; } set { dataGridView1 = value; } }
         public DataGridView DataGridView2 { get { return dataGridView2; } set { dataGridView2 = value; } }
@@ -485,10 +503,97 @@ namespace WiseyAdressbuch
         public TabControl TabControl1 { get { return tabControl1; } set { tabControl1 = value; } }
         public TabPage TabPage1 { get { return tabPage1; } set { tabPage1 = value; } }
         public TabPage TabPage2 { get { return tabPage2; } set { tabPage2 = value; } }
-        
-        
-        
 
+        public Label[] tab1Labels = new Label[8];
+        public Label[] tab2Labels = new Label[4];
+
+        public TextBox[] tab1TextBoxes = new TextBox[8];
+        public TextBox[] tab2TextBoxes = new TextBox[4];
+
+        public Dictionary<Label, TextBox> labelTextBoxDict = new Dictionary<Label, TextBox>();
+        
+        public void InitSearchControls()
+        {
+
+            tab1Labels[0] = ID;
+            tab1Labels[1] = Anrede;
+            tab1Labels[2] = Titel;
+            tab1Labels[3] = Vorname;
+            tab1Labels[4] = Nachname;
+            tab1Labels[5] = Telefonnummer;
+            tab1Labels[6] = Organisation;
+            tab1Labels[7] = EMail;
+
+            tab1TextBoxes[0] = textBoxID;
+            tab1TextBoxes[1] = textBoxAnrede;
+            tab1TextBoxes[2] = textBoxTitel;
+            tab1TextBoxes[3] = textBoxVorname;
+            tab1TextBoxes[4] = textBoxNachname;
+            tab1TextBoxes[5] = textBoxTelefonnummer;
+            tab1TextBoxes[6] = textBoxOrganisation;
+            tab1TextBoxes[7] = textBoxEMail;
+
+            tab2Labels[0] = Firmenname;
+            tab2Labels[1] = Adresse;
+            tab2Labels[2] = Telefon;
+            tab2Labels[3] = Webseite;
+
+            tab2TextBoxes[0] = textBoxFirmenname;
+            tab2TextBoxes[1] = textBoxAdresse;
+            tab2TextBoxes[2] = textBoxTelefon;
+            tab2TextBoxes[3] = textBoxWebseite;
+
+            for(int i = 0; i < tab1Labels.Length; i++)
+            {
+                labelTextBoxDict.Add(tab1Labels[i], tab1TextBoxes[i]);
+            }
+
+            for(int i = 0; i < tab2Labels.Length; i++)
+            {
+                labelTextBoxDict.Add(tab2Labels[i], tab2TextBoxes[i]);
+            }
+
+
+
+            //tab1SearchFields = new SearchField[columnNames.Length];
+
+
+            //if(tableName == "Mitarbeiter")
+            //{
+            //    for (int i = 0; i < columnNames.Length; i++)
+            //    {
+            //        tab1SearchFields[i] = new SearchField(columnNames[i]);
+            //        tableLayoutPanel1.SetRow(tab1SearchFields[i], 0);
+            //        tableLayoutPanel1.SetColumn(tab1SearchFields[i], i);
+            //        tab1SearchFields[i].Show();
+            //    }
+            //}
+
+            //if (tableName == "Organisation")
+            //{
+            //    for (int i = 0; i < columnNames.Length; i++)
+            //    {
+            //        tab2SearchFields[i] = new SearchField(columnNames[i]);
+            //        tableLayoutPanel2.SetRow(tab1SearchFields[i], 0);
+            //        tableLayoutPanel2.SetColumn(tab1SearchFields[i], i);
+            //        tab2SearchFields[i].Show();
+            //    }
+            //}
+
+        }
+
+        private TextBox textBoxEMail;
+        private TextBox textBoxOrganisation;
+        private TextBox textBoxTelefonnummer;
+        private TextBox textBoxNachname;
+        private TextBox textBoxVorname;
+        private TextBox textBoxTitel;
+        private TextBox textBoxAnrede;
+        private TextBox textBoxID;
+        private TextBox textBoxWebseite;
+        private TextBox textBoxTelefon;
+        private TextBox textBoxAdresse;
+        private TextBox textBoxFirmenname;
     }
 }
 
