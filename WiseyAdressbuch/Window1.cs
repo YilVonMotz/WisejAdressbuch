@@ -7,14 +7,8 @@ namespace WiseyAdressbuch
 {
     public partial class Window1 : Form
     {
-        public delegate void OnSaveClickedDel(object sender, EventArgs e);
-        public OnSaveClickedDel OnSaveClicked;
-
         public delegate void OnCellValueChangedDel(object sender, DataGridViewCellEventArgs e);
         public OnCellValueChangedDel OnCellValueChanged;
-                
-        public delegate void OnTabControlClickDel(object sender, EventArgs e);
-        public OnTabControlClickDel OnTabControlClick;
 
         public delegate void OnSearchButtonClickDel(object sender, EventArgs e);
         public OnSearchButtonClickDel OnSearchButtonClick;
@@ -22,26 +16,19 @@ namespace WiseyAdressbuch
         public Dictionary<string, string> searchSelection = new Dictionary<string, string>();
 
         public Window1
-            (
-            OnSaveClickedDel onSaveClickedDel
-            , OnCellValueChangedDel onCellValueChanged
-            , OnTabControlClickDel onTabControlClick
+            (            
+              OnCellValueChangedDel onCellValueChanged            
             ,OnSearchButtonClickDel onSearchButtonClick
             )
         {
             InitializeComponent();
-            OnSaveClicked += onSaveClickedDel;
+            
             OnCellValueChanged += onCellValueChanged;
-            OnTabControlClick += onTabControlClick;
             OnSearchButtonClick += onSearchButtonClick;
 
             
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            OnSaveClicked(sender,e);
-        }
+        
 
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {        

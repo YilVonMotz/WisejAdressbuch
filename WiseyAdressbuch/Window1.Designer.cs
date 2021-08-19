@@ -34,7 +34,6 @@ namespace WiseyAdressbuch
         {
             this.components = new System.ComponentModel.Container();
             this.dataGridView1 = new Wisej.Web.DataGridView();
-            this.button1 = new Wisej.Web.Button();
             this.tabControl1 = new Wisej.Web.TabControl();
             this.tabPage1 = new Wisej.Web.TabPage();
             this.button3 = new Wisej.Web.Button();
@@ -88,18 +87,9 @@ namespace WiseyAdressbuch
             | Wisej.Web.AnchorStyles.Right)));
             this.dataGridView1.Location = new System.Drawing.Point(17, 72);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(997, 325);
+            this.dataGridView1.Size = new System.Drawing.Size(997, 292);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellValueChanged += new Wisej.Web.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(354, 45);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 27);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Save";
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // tabControl1
             // 
@@ -108,10 +98,10 @@ namespace WiseyAdressbuch
             | Wisej.Web.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Location = new System.Drawing.Point(3, 45);
+            this.tabControl1.Location = new System.Drawing.Point(3, 78);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.PageInsets = new Wisej.Web.Padding(1, 35, 1, 1);
-            this.tabControl1.Size = new System.Drawing.Size(1032, 450);
+            this.tabControl1.Size = new System.Drawing.Size(1032, 417);
             this.tabControl1.TabIndex = 2;
             // 
             // tabPage1
@@ -121,7 +111,7 @@ namespace WiseyAdressbuch
             this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Location = new System.Drawing.Point(1, 35);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1030, 414);
+            this.tabPage1.Size = new System.Drawing.Size(1030, 381);
             this.tabPage1.Text = "tabPage1";
             // 
             // button3
@@ -317,7 +307,7 @@ namespace WiseyAdressbuch
             this.tabPage2.Controls.Add(this.dataGridView2);
             this.tabPage2.Location = new System.Drawing.Point(1, 35);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1030, 414);
+            this.tabPage2.Size = new System.Drawing.Size(1030, 381);
             this.tabPage2.Text = "tabPage2";
             // 
             // button2
@@ -432,7 +422,7 @@ namespace WiseyAdressbuch
             | Wisej.Web.AnchorStyles.Right)));
             this.dataGridView2.Location = new System.Drawing.Point(17, 72);
             this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.Size = new System.Drawing.Size(997, 320);
+            this.dataGridView2.Size = new System.Drawing.Size(997, 287);
             this.dataGridView2.TabIndex = 1;
             this.dataGridView2.CellValueChanged += new Wisej.Web.DataGridViewCellEventHandler(this.dataGridView2_CellValueChanged);
             // 
@@ -450,7 +440,6 @@ namespace WiseyAdressbuch
             this.AutoScaleMode = Wisej.Web.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1038, 513);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.button1);
             this.Name = "Window1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -473,7 +462,6 @@ namespace WiseyAdressbuch
         private Wisej.Web.DataGridView dataGridView1;
         private BindingSource window1BindingSource;
         private BindingSource window1BindingSource1;
-        private Button button1;
         private TabControl tabControl1;
         private TabPage tabPage1;
         private TabPage tabPage2;
@@ -499,7 +487,6 @@ namespace WiseyAdressbuch
 
         public DataGridView DataGridView1 { get { return dataGridView1; } set { dataGridView1 = value; } }
         public DataGridView DataGridView2 { get { return dataGridView2; } set { dataGridView2 = value; } }
-        public Button Button1 { get { return button1; } set{ button1 = value; } }
         public TabControl TabControl1 { get { return tabControl1; } set { tabControl1 = value; } }
         public TabPage TabPage1 { get { return tabPage1; } set { tabPage1 = value; } }
         public TabPage TabPage2 { get { return tabPage2; } set { tabPage2 = value; } }
@@ -512,6 +499,8 @@ namespace WiseyAdressbuch
 
         public Dictionary<Label, TextBox> labelTextBoxDict = new Dictionary<Label, TextBox>();
         public Dictionary<Label, int> labelIndex = new Dictionary<Label, int>();
+        public Dictionary<TextBox, Label> textBoxLabelDict = new Dictionary<TextBox, Label>();
+        public Dictionary<int, Label> indexLable = new Dictionary<int, Label>();
                 
 
 
@@ -550,12 +539,16 @@ namespace WiseyAdressbuch
             {
                 labelTextBoxDict.Add(tab1Labels[i], tab1TextBoxes[i]);
                 labelIndex.Add(tab1Labels[i], i);
+                textBoxLabelDict.Add(tab1TextBoxes[i], tab1Labels[i]);
+                
             }
 
             for(int i = 0; i < tab2Labels.Length; i++)
             {
                 labelTextBoxDict.Add(tab2Labels[i], tab2TextBoxes[i]);
                 labelIndex.Add(tab2Labels[i], i);
+                textBoxLabelDict.Add(tab2TextBoxes[i], tab2Labels[i]);
+                
             }
 
 

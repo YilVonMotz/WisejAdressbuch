@@ -21,10 +21,8 @@ namespace WiseyAdressbuch
         private static SQLiteCommand deleteMitarbeiter;
         private static SQLiteCommand deleteOrganisation;
 
-
-        private static SQLiteDataAdapter dataAdapter;        
-
-        private static DataTable dataTable;       
+        private static DataTable dataTable;
+        private static SQLiteDataAdapter dataAdapter;                
 
         private static SQLiteTransaction transaction;
         private static Window1 windowHandle;
@@ -32,7 +30,7 @@ namespace WiseyAdressbuch
         private static string[] mitarbeiterColumnNames = new string[8];
         private static string[] organisationColumnNames = new string[4];
 
-        
+        public static string currentTableName;
 
 
         /// <summary>
@@ -44,9 +42,7 @@ namespace WiseyAdressbuch
 
             Window1 window = new Window1
                 (
-                OnSaveClicked
-                , OnCellValueChanged
-                , OnTabControlClicked
+                  OnCellValueChanged                
                 , OnSearchButtonClick
                 );
 
@@ -66,8 +62,9 @@ namespace WiseyAdressbuch
             dataAdapter.RowUpdated += DataAdapter_RowUpdated;
             //--
 
-            windowHandle.TabControl1.Selected += TabControl1_Selected;                       
-            
+
+            windowHandle.TabControl1.Selected += TabControl1_Selected;
+            currentTableName = windowHandle.TabControl1.SelectedTab.Text;
             connection.Open();
             transaction = connection.BeginTransaction();
             FillCurrentDataGrid(BuildSelectCommand());
@@ -116,13 +113,13 @@ namespace WiseyAdressbuch
         {
             selectCommand = new SQLiteCommand();
             selectCommand.Connection = connection;
-            selectCommand.CommandText = "SELECT * FROM " + windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;
+            selectCommand.CommandText = "SELECT * FROM " + currentTableName;
             return selectCommand;
         }
 
 
 
-        private static SQLiteCommand BuildSelectCommand(string[] columns, object[] values)
+        private static SQLiteCommand CreateSelectCommand(string[] columns, object[] values)
         {            
             selectCommand = new SQLiteCommand();
             selectCommand.Connection = connection;
@@ -186,6 +183,7 @@ namespace WiseyAdressbuch
 
         private static void TabControl1_Selected(object sender, TabControlEventArgs e)
         {
+            currentTableName = e.TabPage.Text;
             FillCurrentDataGrid(BuildSelectCommand());
         }
 
@@ -214,18 +212,14 @@ namespace WiseyAdressbuch
         }
         
 
-
-        public static void OnSaveClicked(object sender, EventArgs e)
-        {
-            dataAdapter.Update(dataTable);
-            transaction.Commit();
-
-        }
        
 
         public static void OnCellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView currentDataGridView = ((DataGridView)sender);
+            Label label = null;
+            TextBox textBox = null;
+
             if (e.RowIndex == currentDataGridView.RowCount-1)
             {
                 MessageBox.Show("Ignore");
@@ -235,28 +229,36 @@ namespace WiseyAdressbuch
                 object cellValue = currentDataGridView.CurrentCell.Value;
                 dataTable.Rows[e.RowIndex][e.ColumnIndex] = cellValue;
 
-                dataAdapter.UpdateCommand = CreateInsertCommand(windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text, e.ColumnIndex, cellValue);
-
+                if(currentTableName == "Mitarbeiter")
+                {
+                    label = windowHandle.tab1Labels[e.ColumnIndex];
+                    textBox = windowHandle.tab1TextBoxes[e.ColumnIndex];
+                }
+                else
+                {
+                    label = windowHandle.tab2Labels[e.ColumnIndex];
+                    textBox = windowHandle.tab2TextBoxes[e.ColumnIndex];
+                }
+                
+                
+                dataAdapter.UpdateCommand = CreateUpdateCommand(label,cellValue.ToString(),e.RowIndex,dataTable.Rows[e.RowIndex][0])  ;
+                dataAdapter.Update(dataTable);
+                transaction.Commit();
+                
             }
 
         }
 
 
 
-        public static void OnTabControlClicked(object sender , EventArgs e)
-        {
-            FillCurrentDataGrid(BuildSelectCommand());
-        }
-
 
         public static void OnSearchButtonClick(object sender, EventArgs e)
         {
             List<string> labels = new List<string>();
             List<string> textBoxes = new List<string>();
+            
 
-            string tableName = windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;
-
-            if(tableName == "Mitarbeiter")
+            if(currentTableName == "Mitarbeiter")
             {
                 for (int i = 0; i < windowHandle.tab1Labels.Length; i++)
                 {
@@ -280,19 +282,29 @@ namespace WiseyAdressbuch
             }
             
 
-            FillCurrentDataGrid(BuildSelectCommand(labels.ToArray(),textBoxes.ToArray()));
+            FillCurrentDataGrid(CreateSelectCommand(labels.ToArray(),textBoxes.ToArray()));
         }
 
       
 
 
 
-        private static SQLiteCommand CreateInsertCommand(string tableName, int columnIndex, object value )
+        private static SQLiteCommand CreateInsertCommand(int columnIndex, object value )
         {
             SQLiteCommand insertCommand = new SQLiteCommand();
             insertCommand.Connection = connection;
-            insertCommand.CommandText = "Insert Into " + tableName + " ('"+dataTable.Columns[columnIndex]+ "') VALUES ('" + value + "')";
+            insertCommand.CommandText = "INSERT INTO " + currentTableName + " ('"+dataTable.Columns[columnIndex]+ "') VALUES ('" + value + "')";
             return insertCommand;
+        }
+
+
+        private static SQLiteCommand CreateUpdateCommand(Label label, string text, int rowIndex, object pKeyValue)
+        {
+            SQLiteCommand updateCommand = new SQLiteCommand();
+            updateCommand.Connection = connection;
+            var pKey = dataTable.Rows[rowIndex][0];
+            updateCommand.CommandText = "UPDATE "+currentTableName+" SET "+label.Text+"='"+text+"' WHERE "+dataTable.Columns[0].ColumnName+" ="+pKeyValue.ToString();
+            return updateCommand;
         }
 
        
@@ -313,10 +325,6 @@ namespace WiseyAdressbuch
                 mitarbeiterColumnNames[i] = mitarbeiterTable.Columns[i].ColumnName;
             }
 
-
-            
-
-
             //tab2 Organisation
             dataAdapter.SelectCommand = new SQLiteCommand("SELECT * FROM Organisation LIMIT 1", connection);
             dataAdapter.Fill(organisationTable);
@@ -325,9 +333,6 @@ namespace WiseyAdressbuch
             {
                 organisationColumnNames[i] = organisationTable.Columns[i].ColumnName;
             }
-
-
-           
 
         }
 
