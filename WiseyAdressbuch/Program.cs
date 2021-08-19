@@ -295,7 +295,9 @@ namespace WiseyAdressbuch
             dataAdapter.Fill(dataTable);
             dataAdapter.Update(dataTable);
             transaction.Commit();
-            FillCurrentDataGrid(CreateSelectCommand());
+            insertCommand = CreateSelectCommand();
+            if(insertCommand != null)
+            FillCurrentDataGrid(insertCommand);
         }
 
 
@@ -382,7 +384,15 @@ namespace WiseyAdressbuch
 
             insertString.Append("(" + labels.ToString() + ") VALUES (" + values.ToString() + ")");
             insertCommand.CommandText = insertString.ToString();
-            return insertCommand;
+
+            if (valueList.Count == 0)
+            {
+                return null;
+            }
+            else
+            {
+                return insertCommand;
+            }            
 
         }
 
