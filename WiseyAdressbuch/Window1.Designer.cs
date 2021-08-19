@@ -511,7 +511,10 @@ namespace WiseyAdressbuch
         public TextBox[] tab2TextBoxes = new TextBox[4];
 
         public Dictionary<Label, TextBox> labelTextBoxDict = new Dictionary<Label, TextBox>();
-        
+        public Dictionary<Label, int> labelIndex = new Dictionary<Label, int>();
+                
+
+
         public void InitSearchControls()
         {
 
@@ -546,11 +549,13 @@ namespace WiseyAdressbuch
             for(int i = 0; i < tab1Labels.Length; i++)
             {
                 labelTextBoxDict.Add(tab1Labels[i], tab1TextBoxes[i]);
+                labelIndex.Add(tab1Labels[i], i);
             }
 
             for(int i = 0; i < tab2Labels.Length; i++)
             {
                 labelTextBoxDict.Add(tab2Labels[i], tab2TextBoxes[i]);
+                labelIndex.Add(tab2Labels[i], i);
             }
 
 

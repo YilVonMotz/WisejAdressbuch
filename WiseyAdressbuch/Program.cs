@@ -140,7 +140,7 @@ namespace WiseyAdressbuch
 
                 if((string)values[i] != string.Empty)
                 {
-                    if (i > 1)
+                    if (i > 0)
                     {
                         sb.Append(" AND ");
                     }
@@ -251,8 +251,20 @@ namespace WiseyAdressbuch
 
         public static void OnSearchButtonClick(object sender, EventArgs e)
         {
+            List<string> labels = new List<string>();
+            List<string> textBoxes = new List<string>();
+
             string tableName = windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;
-            FillCurrentDataGrid(BuildSelectCommand());
+            for(int i = 0; i < windowHandle.tab1Labels.Length; i++)
+            {
+                if(windowHandle.tab1TextBoxes[i] != null && windowHandle.tab1TextBoxes[i].Text != string.Empty)
+                {
+                    textBoxes.Add(windowHandle.tab1TextBoxes[i].Text);
+                    labels.Add(windowHandle.tab1Labels[i].Text);
+                }
+            }
+
+            FillCurrentDataGrid(BuildSelectCommand(labels.ToArray(),textBoxes.ToArray()));
         }
 
       
