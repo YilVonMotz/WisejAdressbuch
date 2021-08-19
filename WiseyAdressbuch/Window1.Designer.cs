@@ -36,6 +36,7 @@ namespace WiseyAdressbuch
             this.dataGridView1 = new Wisej.Web.DataGridView();
             this.tabControl1 = new Wisej.Web.TabControl();
             this.tabPage1 = new Wisej.Web.TabPage();
+            this.einfuegenT1 = new Wisej.Web.Button();
             this.button3 = new Wisej.Web.Button();
             this.tableLayoutPanel1 = new Wisej.Web.TableLayoutPanel();
             this.textBoxEMail = new Wisej.Web.TextBox();
@@ -46,7 +47,7 @@ namespace WiseyAdressbuch
             this.textBoxTitel = new Wisej.Web.TextBox();
             this.textBoxAnrede = new Wisej.Web.TextBox();
             this.textBoxID = new Wisej.Web.TextBox();
-            this.EMail = new Wisej.Web.Label();
+            this.EMailAdresse = new Wisej.Web.Label();
             this.Organisation = new Wisej.Web.Label();
             this.Telefonnummer = new Wisej.Web.Label();
             this.Nachname = new Wisej.Web.Label();
@@ -55,6 +56,7 @@ namespace WiseyAdressbuch
             this.Anrede = new Wisej.Web.Label();
             this.ID = new Wisej.Web.Label();
             this.tabPage2 = new Wisej.Web.TabPage();
+            this.einfuegenT2 = new Wisej.Web.Button();
             this.button2 = new Wisej.Web.Button();
             this.tableLayoutPanel2 = new Wisej.Web.TableLayoutPanel();
             this.textBoxWebseite = new Wisej.Web.TextBox();
@@ -68,8 +70,6 @@ namespace WiseyAdressbuch
             this.dataGridView2 = new Wisej.Web.DataGridView();
             this.window1BindingSource = new Wisej.Web.BindingSource(this.components);
             this.window1BindingSource1 = new Wisej.Web.BindingSource(this.components);
-            this.einfuegenT1 = new Wisej.Web.Button();
-            this.einfuegenT2 = new Wisej.Web.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -83,7 +83,6 @@ namespace WiseyAdressbuch
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AllowUserToAddRows = true;
             this.dataGridView1.Anchor = ((Wisej.Web.AnchorStyles)((((Wisej.Web.AnchorStyles.Top | Wisej.Web.AnchorStyles.Bottom) 
             | Wisej.Web.AnchorStyles.Left) 
             | Wisej.Web.AnchorStyles.Right)));
@@ -92,6 +91,7 @@ namespace WiseyAdressbuch
             this.dataGridView1.Size = new System.Drawing.Size(997, 292);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellValueChanged += new Wisej.Web.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
+            this.dataGridView1.KeyDown += new Wisej.Web.KeyEventHandler(this.dataGridView1_KeyDown);
             // 
             // tabControl1
             // 
@@ -105,6 +105,7 @@ namespace WiseyAdressbuch
             this.tabControl1.PageInsets = new Wisej.Web.Padding(1, 35, 1, 1);
             this.tabControl1.Size = new System.Drawing.Size(1032, 417);
             this.tabControl1.TabIndex = 2;
+            this.tabControl1.KeyDown += new Wisej.Web.KeyEventHandler(this.tabControl1_KeyDown);
             // 
             // tabPage1
             // 
@@ -116,6 +117,15 @@ namespace WiseyAdressbuch
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(1030, 381);
             this.tabPage1.Text = "tabPage1";
+            // 
+            // einfuegenT1
+            // 
+            this.einfuegenT1.Location = new System.Drawing.Point(946, 37);
+            this.einfuegenT1.Name = "einfuegenT1";
+            this.einfuegenT1.Size = new System.Drawing.Size(68, 32);
+            this.einfuegenT1.TabIndex = 5;
+            this.einfuegenT1.Text = "Einfügen";
+            this.einfuegenT1.Click += new System.EventHandler(this.einfuegen_Click);
             // 
             // button3
             // 
@@ -148,7 +158,7 @@ namespace WiseyAdressbuch
             this.tableLayoutPanel1.Controls.Add(this.textBoxTitel, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBoxAnrede, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.textBoxID, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.EMail, 7, 0);
+            this.tableLayoutPanel1.Controls.Add(this.EMailAdresse, 7, 0);
             this.tableLayoutPanel1.Controls.Add(this.Organisation, 6, 0);
             this.tableLayoutPanel1.Controls.Add(this.Telefonnummer, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.Nachname, 4, 0);
@@ -231,14 +241,14 @@ namespace WiseyAdressbuch
             this.textBoxID.TabIndex = 8;
             this.textBoxID.TextChanged += new System.EventHandler(this.textBoxID_TextChanged);
             // 
-            // EMail
+            // EMailAdresse
             // 
-            this.EMail.AutoSize = true;
-            this.EMail.Location = new System.Drawing.Point(702, 3);
-            this.EMail.Name = "EMail";
-            this.EMail.Size = new System.Drawing.Size(37, 15);
-            this.EMail.TabIndex = 7;
-            this.EMail.Text = "EMail";
+            this.EMailAdresse.AutoSize = true;
+            this.EMailAdresse.Location = new System.Drawing.Point(702, 3);
+            this.EMailAdresse.Name = "EMailAdresse";
+            this.EMailAdresse.Size = new System.Drawing.Size(85, 15);
+            this.EMailAdresse.TabIndex = 7;
+            this.EMailAdresse.Text = "EMailAdresse";
             // 
             // Organisation
             // 
@@ -313,6 +323,15 @@ namespace WiseyAdressbuch
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Size = new System.Drawing.Size(1030, 381);
             this.tabPage2.Text = "tabPage2";
+            // 
+            // einfuegenT2
+            // 
+            this.einfuegenT2.Location = new System.Drawing.Point(946, 35);
+            this.einfuegenT2.Name = "einfuegenT2";
+            this.einfuegenT2.Size = new System.Drawing.Size(68, 31);
+            this.einfuegenT2.TabIndex = 4;
+            this.einfuegenT2.Text = "einfuegen";
+            this.einfuegenT2.Click += new System.EventHandler(this.einfuegenT2_Click);
             // 
             // button2
             // 
@@ -420,7 +439,6 @@ namespace WiseyAdressbuch
             // 
             // dataGridView2
             // 
-            this.dataGridView2.AllowUserToAddRows = true;
             this.dataGridView2.Anchor = ((Wisej.Web.AnchorStyles)((((Wisej.Web.AnchorStyles.Top | Wisej.Web.AnchorStyles.Bottom) 
             | Wisej.Web.AnchorStyles.Left) 
             | Wisej.Web.AnchorStyles.Right)));
@@ -437,24 +455,6 @@ namespace WiseyAdressbuch
             // window1BindingSource1
             // 
             this.window1BindingSource1.DataSource = typeof(WiseyAdressbuch.Window1);
-            // 
-            // einfuegenT1
-            // 
-            this.einfuegenT1.Location = new System.Drawing.Point(946, 37);
-            this.einfuegenT1.Name = "einfuegenT1";
-            this.einfuegenT1.Size = new System.Drawing.Size(68, 32);
-            this.einfuegenT1.TabIndex = 5;
-            this.einfuegenT1.Text = "Einfügen";
-            this.einfuegenT1.Click += new System.EventHandler(this.einfuegen_Click);
-            // 
-            // einfuegenT2
-            // 
-            this.einfuegenT2.Location = new System.Drawing.Point(946, 35);
-            this.einfuegenT2.Name = "einfuegenT2";
-            this.einfuegenT2.Size = new System.Drawing.Size(68, 31);
-            this.einfuegenT2.TabIndex = 4;
-            this.einfuegenT2.Text = "einfuegen";
-            this.einfuegenT2.Click += new System.EventHandler(this.einfuegenT2_Click);
             // 
             // Window1
             // 
@@ -501,7 +501,7 @@ namespace WiseyAdressbuch
         private Label Vorname;
         private Label Telefonnummer;
         private Label Organisation;
-        private Label EMail;
+        private Label EMailAdresse;
         private Label Adresse;
         private Label Firmenname;
         private Label Webseite;
@@ -536,7 +536,7 @@ namespace WiseyAdressbuch
             tab1Labels[4] = Nachname;
             tab1Labels[5] = Telefonnummer;
             tab1Labels[6] = Organisation;
-            tab1Labels[7] = EMail;
+            tab1Labels[7] = EMailAdresse;
 
             tab1TextBoxes[0] = textBoxID;
             tab1TextBoxes[1] = textBoxAnrede;

@@ -16,6 +16,9 @@ namespace WiseyAdressbuch
         public delegate void OnInsertButtonClickDel(object sender, EventArgs e);
         public OnInsertButtonClickDel OnInsertButtonClick;
 
+        public delegate void OnDeleteKeyPressedDel(object sender, KeyEventArgs keyEventArgs);
+        public OnDeleteKeyPressedDel OnDeleteKeyPressed;
+
         public Dictionary<string, string> searchSelection = new Dictionary<string, string>();
 
         public Window1
@@ -23,6 +26,7 @@ namespace WiseyAdressbuch
               OnCellValueChangedDel onCellValueChanged            
             ,OnSearchButtonClickDel onSearchButtonClick
             ,OnInsertButtonClickDel onInsertButtonClick
+            ,OnDeleteKeyPressedDel onDeleteKeyPressed
             )
         {
             InitializeComponent();
@@ -30,6 +34,7 @@ namespace WiseyAdressbuch
             OnCellValueChanged += onCellValueChanged;
             OnSearchButtonClick += onSearchButtonClick;
             OnInsertButtonClick += onInsertButtonClick;
+            OnDeleteKeyPressed += onDeleteKeyPressed;
             
         }
         
@@ -127,6 +132,18 @@ namespace WiseyAdressbuch
         private void einfuegenT2_Click(object sender, EventArgs e)
         {
             OnInsertButtonClick(sender, e);
+        }
+
+        private void dataGridView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            OnDeleteKeyPressed( sender, e);
+        }
+
+        private void tabControl1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Delete)
+            OnDeleteKeyPressed(sender, e);
         }
     }
 }

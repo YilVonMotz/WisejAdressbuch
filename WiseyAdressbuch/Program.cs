@@ -17,8 +17,8 @@ namespace WiseyAdressbuch
         private static SQLiteCommand insertCommand;
         private static SQLiteCommand updateCommand;
         private static SQLiteCommand modifyOrganisation;
-        private static SQLiteCommand deleteMitarbeiter;
-        private static SQLiteCommand deleteOrganisation;
+        private static SQLiteCommand deleteCommand;
+        
 
         private static DataTable dataTable;
         private static SQLiteDataAdapter dataAdapter;                
@@ -44,6 +44,7 @@ namespace WiseyAdressbuch
                   OnCellValueChanged                
                 , OnSearchButtonClick
                 , OnInsertButtonClick
+                , OnDeleteKeyPressed
                 );
 
             windowHandle = window;
@@ -298,6 +299,23 @@ namespace WiseyAdressbuch
         }
 
 
+
+        public static void OnDeleteKeyPressed(object sender,KeyEventArgs e)
+        {
+            DataGridViewSelectedRowCollection rows = ((DataGridView)sender).SelectedRows;
+
+            foreach (DataGridViewRow item in rows)
+            {
+                dataAdapter.DeleteCommand = CreateDeleteCommand(dataTable.Columns[0].ColumnName, item.Cells[0].Value.ToString());
+                dataAdapter.DeleteCommand.ExecuteNonQuery();
+                
+            }
+            dataAdapter.Fill(dataTable);
+            dataAdapter.Update(dataTable);            
+            FillCurrentDataGrid(CreateSelectCommand());
+            
+        }
+
         private static SQLiteCommand CreateInsertCommand( )
         {
             insertCommand = new SQLiteCommand();
@@ -379,6 +397,18 @@ namespace WiseyAdressbuch
         }
 
        
+        private static SQLiteCommand CreateDeleteCommand(string pKeyName, string pKeyValue)
+        {
+            deleteCommand = new SQLiteCommand();
+            deleteCommand.Connection = connection;
+            deleteCommand.CommandText = "DELETE FROM " + currentTableName + " WHERE " + pKeyName + "='" + pKeyValue + "'";
+            dataAdapter.DeleteCommand = deleteCommand;
+
+            return deleteCommand;
+        }
+
+
+
         private static void InitializeSearchUI()
         {
             DataTable mitarbeiterTable = new DataTable();
