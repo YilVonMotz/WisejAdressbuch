@@ -255,14 +255,30 @@ namespace WiseyAdressbuch
             List<string> textBoxes = new List<string>();
 
             string tableName = windowHandle.TabControl1.GetControl(windowHandle.TabControl1.SelectedIndex).Text;
-            for(int i = 0; i < windowHandle.tab1Labels.Length; i++)
+
+            if(tableName == "Mitarbeiter")
             {
-                if(windowHandle.tab1TextBoxes[i] != null && windowHandle.tab1TextBoxes[i].Text != string.Empty)
+                for (int i = 0; i < windowHandle.tab1Labels.Length; i++)
                 {
-                    textBoxes.Add(windowHandle.tab1TextBoxes[i].Text);
-                    labels.Add(windowHandle.tab1Labels[i].Text);
+                    if (windowHandle.tab1TextBoxes[i] != null && windowHandle.tab1TextBoxes[i].Text != string.Empty)
+                    {
+                        textBoxes.Add(windowHandle.tab1TextBoxes[i].Text);
+                        labels.Add(windowHandle.tab1Labels[i].Text);
+                    }
                 }
             }
+            else
+            {
+                for (int i = 0; i < windowHandle.tab2Labels.Length; i++)
+                {
+                    if (windowHandle.tab2TextBoxes[i] != null && windowHandle.tab2TextBoxes[i].Text != string.Empty)
+                    {
+                        textBoxes.Add(windowHandle.tab2TextBoxes[i].Text);
+                        labels.Add(windowHandle.tab2Labels[i].Text);
+                    }
+                }
+            }
+            
 
             FillCurrentDataGrid(BuildSelectCommand(labels.ToArray(),textBoxes.ToArray()));
         }
