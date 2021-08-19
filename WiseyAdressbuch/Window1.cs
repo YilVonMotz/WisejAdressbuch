@@ -13,19 +13,23 @@ namespace WiseyAdressbuch
         public delegate void OnSearchButtonClickDel(object sender, EventArgs e);
         public OnSearchButtonClickDel OnSearchButtonClick;
 
+        public delegate void OnInsertButtonClickDel(object sender, EventArgs e);
+        public OnInsertButtonClickDel OnInsertButtonClick;
+
         public Dictionary<string, string> searchSelection = new Dictionary<string, string>();
 
         public Window1
             (            
               OnCellValueChangedDel onCellValueChanged            
             ,OnSearchButtonClickDel onSearchButtonClick
+            ,OnInsertButtonClickDel onInsertButtonClick
             )
         {
             InitializeComponent();
             
             OnCellValueChanged += onCellValueChanged;
             OnSearchButtonClick += onSearchButtonClick;
-
+            OnInsertButtonClick += onInsertButtonClick;
             
         }
         
@@ -113,6 +117,16 @@ namespace WiseyAdressbuch
         private void textBoxEMail_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void einfuegen_Click(object sender, EventArgs e)
+        {
+            OnInsertButtonClick(sender,e);
+        }
+
+        private void einfuegenT2_Click(object sender, EventArgs e)
+        {
+            OnInsertButtonClick(sender, e);
         }
     }
 }

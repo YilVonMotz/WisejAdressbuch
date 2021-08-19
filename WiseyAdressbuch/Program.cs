@@ -14,9 +14,8 @@ namespace WiseyAdressbuch
         private static SQLiteConnection connection;
 
         private static SQLiteCommand selectCommand;
-        private static SQLiteCommand insertIntoMitarbeiter;
-        private static SQLiteCommand insertIntoOrganisation;
-        private static SQLiteCommand modifyMitarbeiter;
+        private static SQLiteCommand insertCommand;
+        private static SQLiteCommand updateCommand;
         private static SQLiteCommand modifyOrganisation;
         private static SQLiteCommand deleteMitarbeiter;
         private static SQLiteCommand deleteOrganisation;
@@ -44,6 +43,7 @@ namespace WiseyAdressbuch
                 (
                   OnCellValueChanged                
                 , OnSearchButtonClick
+                , OnInsertButtonClick
                 );
 
             windowHandle = window;
@@ -54,7 +54,7 @@ namespace WiseyAdressbuch
 
             connection = new SQLiteConnection(connectionString);
 
-            BuildSelectCommand();
+            CreateSelectCommand();
 
             //dataAdapter
             dataAdapter = new SQLiteDataAdapter(selectCommand);
@@ -67,7 +67,7 @@ namespace WiseyAdressbuch
             currentTableName = windowHandle.TabControl1.SelectedTab.Text;
             connection.Open();
             transaction = connection.BeginTransaction();
-            FillCurrentDataGrid(BuildSelectCommand());
+            FillCurrentDataGrid(CreateSelectCommand());
             InitializeSearchUI();
             
             
@@ -109,7 +109,7 @@ namespace WiseyAdressbuch
 
 
 
-        private static SQLiteCommand BuildSelectCommand()
+        private static SQLiteCommand CreateSelectCommand()
         {
             selectCommand = new SQLiteCommand();
             selectCommand.Connection = connection;
@@ -184,12 +184,12 @@ namespace WiseyAdressbuch
         private static void TabControl1_Selected(object sender, TabControlEventArgs e)
         {
             currentTableName = e.TabPage.Text;
-            FillCurrentDataGrid(BuildSelectCommand());
+            FillCurrentDataGrid(CreateSelectCommand());
         }
 
         private static void FillCurrentDataGrid(SQLiteCommand _selectCommand)
         {
-            BuildSelectCommand();
+            CreateSelectCommand();
             dataTable = new DataTable();
             dataAdapter.SelectCommand = _selectCommand;
             dataAdapter.Fill(dataTable);
@@ -286,15 +286,86 @@ namespace WiseyAdressbuch
         }
 
       
-
-
-
-        private static SQLiteCommand CreateInsertCommand(int columnIndex, object value )
+        public static void OnInsertButtonClick(object sender, EventArgs e)
         {
-            SQLiteCommand insertCommand = new SQLiteCommand();
+            dataTable = new DataTable();
+            dataAdapter.InsertCommand = CreateInsertCommand();
+            dataAdapter.InsertCommand.ExecuteNonQuery();
+            dataAdapter.Fill(dataTable);
+            dataAdapter.Update(dataTable);
+            transaction.Commit();
+            FillCurrentDataGrid(CreateSelectCommand());
+        }
+
+
+        private static SQLiteCommand CreateInsertCommand( )
+        {
+            insertCommand = new SQLiteCommand();
             insertCommand.Connection = connection;
-            insertCommand.CommandText = "INSERT INTO " + currentTableName + " ('"+dataTable.Columns[columnIndex]+ "') VALUES ('" + value + "')";
+            StringBuilder insertString = new StringBuilder("Insert into " + currentTableName);
+            StringBuilder values = new StringBuilder();
+            StringBuilder labels = new StringBuilder();
+            List<Label> labelList = new List<Label>();
+            List<TextBox> valueList = new List<TextBox>();
+
+            if(currentTableName == "Mitarbeiter")
+            {
+                foreach (TextBox item in windowHandle.tab1TextBoxes)
+                {
+                    if (item.Text != string.Empty)
+                    {
+                        labelList.Add(windowHandle.textBoxLabelDict[item]) ;
+                        valueList.Add(item);
+                    }
+                }
+            }
+            else
+            {
+                foreach (TextBox item in windowHandle.tab2TextBoxes)
+                {
+                    if (item.Text != string.Empty)
+                    {
+                        labelList.Add(windowHandle.textBoxLabelDict[item]);
+                        valueList.Add(item);
+                    }
+                }
+            }
+
+            
+
+
+            for (int i = 0; i < labelList.Count; i++)
+            {                
+
+                if (valueList[i].Text != string.Empty)
+                {
+                    if (i > 0)
+                    {
+
+                        values.Append(",");
+                        values.Append("'" + valueList[i].Text + "'");
+
+                        labels.Append(",");
+                        labels.Append("'" + labelList[i].Text + "'");
+
+                    }
+                    else
+                    {
+
+                        labels.Append("'" + labelList[i].Text + "'");
+                        values.Append("'" + valueList[i].Text + "'");
+
+                    }
+                }
+
+
+            }
+
+
+            insertString.Append("(" + labels.ToString() + ") VALUES (" + values.ToString() + ")");
+            insertCommand.CommandText = insertString.ToString();
             return insertCommand;
+
         }
 
 

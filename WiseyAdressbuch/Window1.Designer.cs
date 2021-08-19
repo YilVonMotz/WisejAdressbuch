@@ -68,6 +68,8 @@ namespace WiseyAdressbuch
             this.dataGridView2 = new Wisej.Web.DataGridView();
             this.window1BindingSource = new Wisej.Web.BindingSource(this.components);
             this.window1BindingSource1 = new Wisej.Web.BindingSource(this.components);
+            this.einfuegenT1 = new Wisej.Web.Button();
+            this.einfuegenT2 = new Wisej.Web.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -106,6 +108,7 @@ namespace WiseyAdressbuch
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.einfuegenT1);
             this.tabPage1.Controls.Add(this.button3);
             this.tabPage1.Controls.Add(this.tableLayoutPanel1);
             this.tabPage1.Controls.Add(this.dataGridView1);
@@ -118,7 +121,7 @@ namespace WiseyAdressbuch
             // 
             this.button3.Location = new System.Drawing.Point(946, 3);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(68, 60);
+            this.button3.Size = new System.Drawing.Size(68, 32);
             this.button3.TabIndex = 4;
             this.button3.Text = "Suchen";
             this.button3.Click += new System.EventHandler(this.button3_Click);
@@ -302,6 +305,7 @@ namespace WiseyAdressbuch
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.einfuegenT2);
             this.tabPage2.Controls.Add(this.button2);
             this.tabPage2.Controls.Add(this.tableLayoutPanel2);
             this.tabPage2.Controls.Add(this.dataGridView2);
@@ -314,7 +318,7 @@ namespace WiseyAdressbuch
             // 
             this.button2.Location = new System.Drawing.Point(946, 3);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(68, 60);
+            this.button2.Size = new System.Drawing.Size(68, 31);
             this.button2.TabIndex = 3;
             this.button2.Text = "Suchen";
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -433,6 +437,24 @@ namespace WiseyAdressbuch
             // window1BindingSource1
             // 
             this.window1BindingSource1.DataSource = typeof(WiseyAdressbuch.Window1);
+            // 
+            // einfuegenT1
+            // 
+            this.einfuegenT1.Location = new System.Drawing.Point(946, 37);
+            this.einfuegenT1.Name = "einfuegenT1";
+            this.einfuegenT1.Size = new System.Drawing.Size(68, 32);
+            this.einfuegenT1.TabIndex = 5;
+            this.einfuegenT1.Text = "Einfügen";
+            this.einfuegenT1.Click += new System.EventHandler(this.einfuegen_Click);
+            // 
+            // einfuegenT2
+            // 
+            this.einfuegenT2.Location = new System.Drawing.Point(946, 35);
+            this.einfuegenT2.Name = "einfuegenT2";
+            this.einfuegenT2.Size = new System.Drawing.Size(68, 31);
+            this.einfuegenT2.TabIndex = 4;
+            this.einfuegenT2.Text = "einfuegen";
+            this.einfuegenT2.Click += new System.EventHandler(this.einfuegenT2_Click);
             // 
             // Window1
             // 
@@ -592,6 +614,8 @@ namespace WiseyAdressbuch
         private TextBox textBoxTelefon;
         private TextBox textBoxAdresse;
         private TextBox textBoxFirmenname;
+        private Button einfuegenT1;
+        private Button einfuegenT2;
     }
 }
 
